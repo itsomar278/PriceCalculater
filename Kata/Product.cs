@@ -8,15 +8,15 @@ namespace Kata
 {
     internal class Product
     {
-        public Product(String Name , long UPC , decimal price)
+        public Product(String Name , long UPC , decimal Price)
         {
-            if(!Name.IsProductName() ||!UPC.IsUPC() ||!price.IsPrice() )
+            if(!Name.IsProductName() ||!UPC.IsUPC() ||!Price.IsPrice() )
             {
                 throw new ArgumentException("check the product data entered "); 
             }
             _Name = Name;
             _UPC = UPC;
-            _Price = price;
+            _Price = Price;
 
         }
      
@@ -69,10 +69,6 @@ namespace Kata
             }
 
         }
-
-
-     
-
 
     }
 }
