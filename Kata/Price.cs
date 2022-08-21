@@ -19,6 +19,7 @@ namespace Kata
         }
 
         public decimal basePrice { get; private set; }
+        public decimal TaxAmount { get; private set; }
 
 
        

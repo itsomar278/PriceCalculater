@@ -14,17 +14,17 @@ namespace Kata
         }
         public decimal CurrentTax { get; }
 
-        public decimal PriceAfterTax(decimal Price)
+        public decimal TaxAmount(decimal Price)
         {
-            decimal FinalPrice = Price + (Price * CurrentTax);
-            FinalPrice = decimal.Round(FinalPrice, 2, MidpointRounding.AwayFromZero);
-            return FinalPrice;
+            decimal taxAmount =  (Price * CurrentTax);
+            taxAmount = decimal.Round(taxAmount, 2, MidpointRounding.AwayFromZero);
+            return taxAmount ;
         }
-        public decimal PriceAfterTax(decimal Price, decimal tax)
+        public decimal TaxAmount(decimal Price, decimal tax)
         {
-            decimal FinalPrice = Price + (Price * tax);
-            FinalPrice = decimal.Round(FinalPrice, 2, MidpointRounding.AwayFromZero);
-            return FinalPrice ;
+            decimal taxAmount = (Price * tax);
+            taxAmount = decimal.Round(taxAmount, 2, MidpointRounding.AwayFromZero);
+            return taxAmount;
         }
 
     }
