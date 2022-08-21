@@ -19,7 +19,14 @@ namespace Kata
         }
 
         public decimal basePrice { get; private set; }
-        public decimal TaxAmount { get; private set; }
+        public decimal DiscountAmount { get;  set; }
+        public decimal TaxAmount { get;  set; } 
+
+        public decimal FinalPrice()
+        {
+            decimal finalPrice = (basePrice - DiscountAmount) + TaxAmount;
+            return finalPrice ;
+        }
 
 
        

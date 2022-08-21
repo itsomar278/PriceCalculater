@@ -12,14 +12,16 @@ namespace Kata
         {
             this.discountPercentage = discountPercentage;
         }
-
         public decimal discountPercentage { get; private set; }
-        public decimal DiscountAmount(decimal price)
+        public void DiscountApplier(Product product)
         {
-            decimal discountAmount =  (price * discountPercentage);
+            decimal discountAmount = (product.price.basePrice * discountPercentage);
             discountAmount = decimal.Round(discountAmount, 2, MidpointRounding.AwayFromZero);
-            return (discountAmount) ;
+            product.price.DiscountAmount = discountAmount;
+            
         }
-    }
 
+    }
 }
+
+ 
