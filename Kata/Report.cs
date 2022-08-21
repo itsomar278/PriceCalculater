@@ -10,7 +10,7 @@ namespace Kata
     {
         public static string DiscountReport(this Product product)
         {
-          return($"$ {product.price.DiscountAmount} amount which was deduced");
+          return($"$ {product.price.UniversalDiscountAmount + product.price.SelectiveDiscountAmount} amount which was deduced");
         }
     }
 }

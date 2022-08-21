@@ -19,12 +19,13 @@ namespace Kata
         }
 
         public decimal basePrice { get; private set; }
-        public decimal DiscountAmount { get;  set; }
+        public decimal UniversalDiscountAmount { get;  set; }
+        public decimal SelectiveDiscountAmount { get; set; }
         public decimal TaxAmount { get;  set; } 
 
         public decimal FinalPrice()
         {
-            decimal finalPrice = (basePrice - DiscountAmount) + TaxAmount;
+            decimal finalPrice = (basePrice - UniversalDiscountAmount - SelectiveDiscountAmount) + TaxAmount;
             return finalPrice ;
         }
 

@@ -14,14 +14,14 @@ namespace Kata
             {
                 throw new ArgumentException("check the product data entered "); 
             }
-            Name = Name;
-            UPC = UPC;
+            this.Name = Name;
+            this.UPC = UPC;
             price = new Price(Price);
             
 
         }
-     
-        public string Name
+        public String Name;
+        public string _Name
         {
             get
             {
@@ -37,12 +37,14 @@ namespace Kata
             }
 
         }
-        public long UPC
+        public long UPC;
+        public long _UPC
         {
             get
             {
                 return UPC;
             }
+            
             private set
             {
                 if (value.IsUPC())
