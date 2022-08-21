@@ -6,11 +6,11 @@ namespace Kata
     {
         static void Main(string[] args)
         {
-            Product x = new("sample", 12345, 20.25m);
-            TaxCalculater.CurrentTax = 0.20m;
-            decimal y = TaxCalculater.PriceAfterTax(x);
+            Product x = new("Sample", 12345, 20.25m);
+            TaxCalculater tax = new TaxCalculater(0.20M);
+            decimal y = tax.PriceAfterTax(x.price.basePrice);
             Console.WriteLine(y);
-            y = TaxCalculater.PriceAfterTax(x , .22m);
+            y = tax.PriceAfterTax(x.price.basePrice, .21m);
             Console.WriteLine(y);
         }
     }

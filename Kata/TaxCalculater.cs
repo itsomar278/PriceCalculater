@@ -6,24 +6,26 @@ using System.Threading.Tasks;
 
 namespace Kata
 {
-    internal static class TaxCalculater
+    public class TaxCalculater
     {
-        public static decimal CurrentTax { get; set; }
-
-        public static decimal PriceAfterTax(Product x )
+        public TaxCalculater(decimal currentTax)
         {
-            decimal FinalPrice = x.Price + (x.Price * CurrentTax);
+            CurrentTax = currentTax;
+        }
+        public decimal CurrentTax { get; }
+
+        public decimal PriceAfterTax(decimal Price)
+        {
+            decimal FinalPrice = Price + (Price * CurrentTax);
             FinalPrice = decimal.Round(FinalPrice, 2, MidpointRounding.AwayFromZero);
             return FinalPrice;
         }
-
-        public static decimal PriceAfterTax(Product x, decimal tax)
+        public decimal PriceAfterTax(decimal Price, decimal tax)
         {
-            decimal FinalPrice = x.Price + (x.Price * tax);
+            decimal FinalPrice = Price + (Price * tax);
             FinalPrice = decimal.Round(FinalPrice, 2, MidpointRounding.AwayFromZero);
             return FinalPrice ;
         }
-
 
     }
 }
