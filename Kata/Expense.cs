@@ -25,7 +25,6 @@ namespace Kata
                 decimal value = price * Amount;
                 value = decimal.Round(value, 2, MidpointRounding.AwayFromZero);
                 return value;
-
             }
         }
         public String Description { get; set; }

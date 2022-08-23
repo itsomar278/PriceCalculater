@@ -8,17 +8,19 @@ namespace Kata
 {
     public class PriceCalculater
     {
-        public PriceCalculater(List<Discount> discounts,List<Expense> expenses, TaxCalculater tax, Product product)
+        public PriceCalculater(List<Discount> discounts, CombiningEnum combiningEnum,List<Expense> expenses, TaxCalculater tax, Product product)
         {
             this.tax = tax;
             this.discounts = discounts;
             this.expenses = expenses;
             this.product = product;
+            this.combiningEnum = combiningEnum;
         }
         public List<Expense> expenses;
         public List<Discount> discounts;
         public TaxCalculater tax;
         public Product product;
+        public CombiningEnum combiningEnum;
         public decimal UniversalDiscountAmount { get; set; }
         public decimal SelectiveDiscountAmount { get; set; }
         public decimal TaxAmount { get; set; }
@@ -34,8 +36,10 @@ namespace Kata
                 if (dis.CanApply(product.UPC))
                 {
                     decimal discountAcount = dis.DiscountAmount(RemainingPrice);
-                    RemainingPrice = RemainingPrice - discountAcount;
-                    ;
+                    if (combiningEnum.Equals(CombiningEnum.Multiplicative))
+                    {
+                        RemainingPrice = RemainingPrice - discountAcount;
+                    }
                     if (dis.GetType() == typeof(UniversalDiscount))
                     {
                         UniversalDiscountAmount += discountAcount;
@@ -46,12 +50,10 @@ namespace Kata
                     }
                 }
             }
-
         }
         public void TaxApply()
         {
             TaxAmount = tax.TaxAmount(RemainingPrice);
-
         }
         public void ApplyAfterTaxDiscounts()
         {
@@ -61,7 +63,11 @@ namespace Kata
                 if (dis.CanApply(product.UPC))
                 {
                     decimal discountAcount = dis.DiscountAmount(RemainingPrice);
-                    RemainingPrice = RemainingPrice - discountAcount;
+                    if (combiningEnum.Equals(CombiningEnum.Multiplicative))
+                        {
+                        RemainingPrice = RemainingPrice - discountAcount;
+                        }
+                   
                     if (dis.GetType() == typeof(UniversalDiscount))
                     {
                         UniversalDiscountAmount += discountAcount;
@@ -70,6 +76,7 @@ namespace Kata
                     {
                         SelectiveDiscountAmount += discountAcount;
                     }
+    
                 }
             }
         }
@@ -78,17 +85,17 @@ namespace Kata
             foreach ( Expense expense in expenses)
             {
                 ExpensesAmount += expense.ExpenseAmount(product.price.basePrice);
-
             }
         }
+     
         public decimal FinalPrice()
         {
             ApplyBeforeTaxDiscounts();
             TaxApply();
             ApplyAfterTaxDiscounts();
+            decimal TotalDiscounts = UniversalDiscountAmount + SelectiveDiscountAmount;
             ExpensesApply();
-
-            return RemainingPrice + TaxAmount + ExpensesAmount;
+            return (product.price.basePrice - TotalDiscounts + TaxAmount + ExpensesAmount);
         }
     }
 }

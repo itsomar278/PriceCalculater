@@ -17,7 +17,7 @@ namespace Kata
             products.Add(C);
             products.Add(D);
             // taxes 
-            TaxCalculater tax = new TaxCalculater(0.20M);
+            TaxCalculater tax = new TaxCalculater(0.21M);
             // discounts
             UniversalDiscount discount = new UniversalDiscount(0.15M ,(DiscountOrderEnum.after));
             SelectiveDiscount discount2 = new SelectiveDiscount(12345,0.07M, (DiscountOrderEnum.after));
@@ -30,13 +30,9 @@ namespace Kata
             List<Expense> expenses = new List<Expense>() ;
             expenses.Add(expense);
             expenses.Add(expense2);
-
-
             // proccessing discount and taxes 
-            PriceCalculater price = new PriceCalculater(discounts,expenses, tax, A);
+            PriceCalculater price = new PriceCalculater(discounts, CombiningEnum.Multiplicative,expenses, tax, A);
             Console.WriteLine(price.FinalPrice());
-            Console.WriteLine(price.DiscountReport());
-            Console.WriteLine(price.ExpensesReport());
         }
     }
 }
