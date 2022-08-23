@@ -17,27 +17,28 @@ namespace Kata
             products.Add(C);
             products.Add(D);
 
-            // applying taxes and discounts 
+            // taxes 
             TaxCalculater tax = new TaxCalculater(0.20M);
-            DiscountCalculater discount = new DiscountCalculater(0.15M);
-            SelectiveDiscountCalculater discount2 = new SelectiveDiscountCalculater(12345, 0.07M);
-            foreach(Product product in products)
-            {
-                decimal finalPrice;
-                tax.TaxApplier(product,0.21M);
-                discount.DiscountApplier(product);
-                discount2.DiscountApplier(product);
-               
-                Console.Write($"tax amount : {product.price.TaxAmount}");
-                Console.Write(" ");
-                Console.Write(product.DiscountReport());
-                Console.Write(" ");
-                Console.Write(product.price.FinalPrice());
-                Console.Write("\n");
-            }
+            // discounts 
+
+            UniversalDiscount discount = new UniversalDiscount(0.15M ,(DiscountOrderEnum.after));
+            SelectiveDiscount discount2 = new SelectiveDiscount(12345,0.07M, (DiscountOrderEnum.before));
+            List<Discount> discounts = new List<Discount>() ;
+            discounts.Add(discount);
+            discounts.Add(discount2);
+
+
+
+
+
+            // proccessing discount and taxes 
+            PriceCalculater price = new PriceCalculater(discounts, tax, A);
+            Console.WriteLine(price.FinalPrice());
+            Console.WriteLine(price.DiscountReport());
+
 
 
         }
     }
 }
-
+   

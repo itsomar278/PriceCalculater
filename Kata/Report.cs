@@ -8,9 +8,9 @@ namespace Kata
 {
     public static class Report
     {
-        public static string DiscountReport(this Product product)
+        public static string DiscountReport(this PriceCalculater price)
         {
-          return($"$ {product.price.UniversalDiscountAmount + product.price.SelectiveDiscountAmount} amount which was deduced");
+          return($"$ {price.UniversalDiscountAmount + price.SelectiveDiscountAmount} amount which was deduced");
         }
     }
 }
