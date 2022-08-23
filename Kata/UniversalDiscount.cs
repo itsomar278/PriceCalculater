@@ -13,25 +13,18 @@ namespace Kata
             this.discountPercentage = discountPercentage;
             this.orderEnum = orderEnum;
         }
-        
         public override DiscountOrderEnum orderEnum { get; set; }
         public override decimal discountPercentage { get;  set; }
-        
         public decimal DiscountAmount(decimal price )
         {
-           
                 decimal discountAmount = (price * discountPercentage);
                 discountAmount = decimal.Round(discountAmount, 2, MidpointRounding.AwayFromZero);
                 return discountAmount;
-            
         }
         public bool CanApply(long upc)
         {
             return true;
         }
-
-       
-
     }
 }
 

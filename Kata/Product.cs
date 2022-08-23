@@ -17,8 +17,6 @@ namespace Kata
             this.Name = Name;
             this.UPC = UPC;
             price = new Price(Price);
-            
-
         }
         public String Name;
         public string _Name
@@ -33,7 +31,6 @@ namespace Kata
                 {
                     Name = value;
                 }
-
             }
 
         }

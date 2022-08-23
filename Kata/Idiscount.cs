@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace Kata
 {
-   
+
     public interface Idiscount
     {
-        public decimal DiscountAmount(decimal price );
+        public decimal DiscountAmount(decimal price);
         public bool CanApply(long upc);
     }
-
-    
 }
- 

@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 namespace Kata
 {
     public enum DiscountOrderEnum
-    {   before = 0,
+    {
+        before = 0,
         after = 1
     }
-
-
 }
