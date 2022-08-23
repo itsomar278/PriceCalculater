@@ -32,13 +32,11 @@ namespace Kata
         }
         public static bool IsProductName(this string name)
         {
-            if(string.IsNullOrEmpty(name))
+            if (string.IsNullOrEmpty(name))
             {
-                return false; 
+                return false;
             }
-            return true; 
+            return true;
         }
-
-
     }
 }
