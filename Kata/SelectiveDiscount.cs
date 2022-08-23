@@ -23,7 +23,7 @@ namespace Kata
             public decimal DiscountAmount(decimal price )
         {
                 decimal discountAmount = (price * discountPercentage);
-                discountAmount = decimal.Round(discountAmount, 2, MidpointRounding.AwayFromZero);
+                discountAmount = decimal.Round(discountAmount, 4, MidpointRounding.AwayFromZero);
                 return discountAmount;
         }
         public bool CanApply(long upc)

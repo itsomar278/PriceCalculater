@@ -23,7 +23,7 @@ namespace Kata
             else
             {
                 decimal value = price * Amount;
-                value = decimal.Round(value, 2, MidpointRounding.AwayFromZero);
+                value = decimal.Round(value, 4, MidpointRounding.AwayFromZero);
                 return value;
             }
         }

@@ -103,12 +103,13 @@ namespace Kata
                 {
                 TotalDiscounts = cap.CAPAmount(product.price.basePrice);
                 }
+            decimal total = product.price.basePrice + TaxAmount - TotalDiscounts;
+            total = decimal.Round(total, 2, MidpointRounding.AwayFromZero);
             ExpensesApply();
             StringBuilder sb = new StringBuilder();
-              sb.Append(product.price.basePrice + TaxAmount - TotalDiscounts).ToString();
-              sb.Append($" {region.ISOCurrencySymbol}");
-              return sb.ToString();
-           
+            sb.Append(total.ToString());
+            sb.Append($" {region.ISOCurrencySymbol}");
+            return sb.ToString();
         }
     }
 }

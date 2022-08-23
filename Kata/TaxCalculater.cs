@@ -16,13 +16,13 @@ namespace Kata
         public decimal TaxAmount(decimal price)
         {
             decimal taxAmount = (price * CurrentTax);
-            taxAmount = decimal.Round(taxAmount, 2, MidpointRounding.AwayFromZero);
+            taxAmount = decimal.Round(taxAmount, 4, MidpointRounding.AwayFromZero);
             return taxAmount;
         }
         public decimal TaxAmount(decimal price, decimal tax)
         {
             decimal taxAmount = (price * CurrentTax);
-            taxAmount = decimal.Round(taxAmount, 2, MidpointRounding.AwayFromZero);
+            taxAmount = decimal.Round(taxAmount, 4, MidpointRounding.AwayFromZero);
             return taxAmount;
         }
     }
