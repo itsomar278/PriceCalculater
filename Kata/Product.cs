@@ -6,73 +6,51 @@ using System.Threading.Tasks;
 
 namespace Kata
 {
-    internal class Product
+    public class Product
     {
-        public Product(String Name , long UPC , decimal price)
+        public Product(String Name , long UPC , decimal Price)
         {
-            if(!Name.IsProductName() ||!UPC.IsUPC() ||!price.IsPrice() )
+            if(!UPC.IsUPC()||!Name.IsProductName()  )
             {
                 throw new ArgumentException("check the product data entered "); 
             }
-            _Name = Name;
-            _UPC = UPC;
-            _Price = price;
-
+            this.Name = Name;
+            this.UPC = UPC;
+            price = new Price(Price);
         }
-     
-        public string _Name;
-        public long _UPC;
-        public decimal _Price; 
-        public decimal Price
-        {
-            get 
-            { 
-                return _Price;
-            }
-            private set 
-            {
-                if (value.IsPrice())
-                {
-                    _Price = value;
-                }
-                throw new ArgumentException("invalid price"); 
-            }
-        }
-        public long UPC
+        public String Name;
+        public string _Name
         {
             get
             {
-                return _UPC;
+                return Name;
             }
+            private set
+            {
+                if (value.IsProductName())
+                {
+                    Name = value;
+                }
+            }
+
+        }
+        public long UPC;
+        public long _UPC
+        {
+            get
+            {
+                return UPC;
+            }
+            
             private set
             {
                 if (value.IsUPC())
                 {
-                    _UPC = value;
+                    UPC = value;
                 }
                 throw new ArgumentException("UPC is invalid");
             }
         }
-        public string Name
-        {
-            get
-            {
-                return _Name;
-            }
-           private set
-            {
-               if (value.IsProductName())
-                {
-                    _Name = value;  
-                }
-
-            }
-
-        }
-
-
-     
-
-
+        public Price price;        
     }
 }
