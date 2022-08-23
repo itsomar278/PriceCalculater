@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Globalization;
+
 
 namespace Kata
 {
@@ -6,7 +8,8 @@ namespace Kata
     {
         static void Main(string[] args)
         {
-            // filling dummy data 
+            
+          // filling dummy data 
             Product A = new("Sample1", 12345, 20.25m);
             Product B = new("Sample2", 12111, 15.00M);
             Product C = new("Sample3", 13345, 100M);
@@ -31,9 +34,14 @@ namespace Kata
             // expenses.Add(expense);
             //expenses.Add(expense2);
             CAP cap = new CAP(4.0M, RelativityEnum.Absolute);
+            // REGION 
+            RegionInfo region = new RegionInfo("US"); 
             // proccessing discount and taxes 
-            PriceCalculater price = new PriceCalculater(discounts, CombiningEnum.Additive,cap ,expenses, tax, A);
+            PriceCalculater price = new PriceCalculater(discounts, CombiningEnum.Additive,cap ,expenses, tax, A ,region);
             Console.WriteLine(price.FinalPrice());
+            Console.WriteLine(price.DiscountReport());
+            Console.WriteLine(price.ExpensesReport());
+          
         }
     }
 }

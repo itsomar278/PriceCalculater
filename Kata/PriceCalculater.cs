@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
+
 
 namespace Kata
 {
     public class PriceCalculater
     {
-        public PriceCalculater(List<Discount> discounts, CombiningEnum combiningEnum, CAP cap, List<Expense> expenses, TaxCalculater tax, Product product)
+        public PriceCalculater(List<Discount> discounts, CombiningEnum combiningEnum, CAP cap, List<Expense> expenses, TaxCalculater tax, Product product , RegionInfo region)
         {
             this.tax = tax;
             this.discounts = discounts;
@@ -16,6 +18,7 @@ namespace Kata
             this.product = product;
             this.combiningEnum = combiningEnum;
             this.cap = cap;
+            this.region = region; 
         }
         public List<Expense> expenses;
         public List<Discount> discounts;
@@ -23,6 +26,7 @@ namespace Kata
         public Product product;
         public CombiningEnum combiningEnum;
         public CAP cap;
+        public RegionInfo region;   
         public decimal UniversalDiscountAmount { get; set; }
         public decimal SelectiveDiscountAmount { get; set; }
         public decimal TaxAmount { get; set; }
@@ -89,7 +93,7 @@ namespace Kata
             }
         }
      
-        public decimal FinalPrice()
+        public String FinalPrice()
         {
             ApplyBeforeTaxDiscounts();
             TaxApply();
@@ -100,7 +104,11 @@ namespace Kata
                 TotalDiscounts = cap.CAPAmount(product.price.basePrice);
                 }
             ExpensesApply();
-            return (product.price.basePrice - TotalDiscounts + TaxAmount + ExpensesAmount);
+            StringBuilder sb = new StringBuilder();
+              sb.Append(product.price.basePrice + TaxAmount - TotalDiscounts).ToString();
+              sb.Append($" {region.ISOCurrencySymbol}");
+              return sb.ToString();
+           
         }
     }
 }

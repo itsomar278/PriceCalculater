@@ -16,15 +16,14 @@ namespace Kata
             {
                 totalDiscounts = capAmount;
             }
-          return($" {totalDiscounts} $ amount which was deduced");
+          return($"{totalDiscounts} {price.region.ISOCurrencySymbol} was deduced from price");
         }
         public static string ExpensesReport(this PriceCalculater price)
         {
             StringBuilder sb = new StringBuilder();
             foreach(Expense expense in price.expenses)
             {
-
-                 sb.AppendLine($"{expense.Description} : {expense.ExpenseAmount(price.product.price.basePrice)} $");
+                 sb.AppendLine($"{expense.Description} : {expense.ExpenseAmount(price.product.price.basePrice)  } {price.region.ISOCurrencySymbol}");
             }
             return sb.ToString() ;
         }
