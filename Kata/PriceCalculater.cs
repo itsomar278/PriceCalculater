@@ -8,22 +8,23 @@ namespace Kata
 {
     public class PriceCalculater
     {
-
-        public PriceCalculater(List<Discount> discounts , TaxCalculater tax , Product product)
+        public PriceCalculater(List<Discount> discounts,List<Expense> expenses, TaxCalculater tax, Product product)
         {
             this.tax = tax;
             this.discounts = discounts;
+            this.expenses = expenses;
             this.product = product;
         }
-
+        public List<Expense> expenses;
         public List<Discount> discounts;
-        public TaxCalculater tax; 
+        public TaxCalculater tax;
         public Product product;
         public decimal UniversalDiscountAmount { get; set; }
         public decimal SelectiveDiscountAmount { get; set; }
         public decimal TaxAmount { get; set; }
         public decimal RemainingPrice { get; set; }
-        public decimal TaxedPrice { get; set; } 
+        public decimal TaxedPrice { get; set; }
+        public decimal ExpensesAmount { get; set; }
         public void ApplyBeforeTaxDiscounts()
         {
             RemainingPrice = product.price.basePrice;
@@ -33,8 +34,8 @@ namespace Kata
                 if (dis.CanApply(product.UPC))
                 {
                     decimal discountAcount = dis.DiscountAmount(RemainingPrice);
-                    RemainingPrice = RemainingPrice  - discountAcount;
-;
+                    RemainingPrice = RemainingPrice - discountAcount;
+                    ;
                     if (dis.GetType() == typeof(UniversalDiscount))
                     {
                         UniversalDiscountAmount += discountAcount;
@@ -45,12 +46,11 @@ namespace Kata
                     }
                 }
             }
-            
-        }
 
-        public void TaxApply ()
+        }
+        public void TaxApply()
         {
-            TaxAmount =  tax.TaxAmount(RemainingPrice);
+            TaxAmount = tax.TaxAmount(RemainingPrice);
 
         }
         public void ApplyAfterTaxDiscounts()
@@ -73,18 +73,22 @@ namespace Kata
                 }
             }
         }
+        public void ExpensesApply()
+        {
+            foreach ( Expense expense in expenses)
+            {
+                ExpensesAmount += expense.ExpenseAmount(product.price.basePrice);
 
+            }
+        }
         public decimal FinalPrice()
         {
             ApplyBeforeTaxDiscounts();
             TaxApply();
             ApplyAfterTaxDiscounts();
-            return RemainingPrice + TaxAmount;
+            ExpensesApply();
+
+            return RemainingPrice + TaxAmount + ExpensesAmount;
         }
-
-
-
-
-
     }
 }

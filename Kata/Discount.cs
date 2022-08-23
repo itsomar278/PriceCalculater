@@ -1,4 +1,5 @@
 ﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Kata
 {
     public abstract class Discount
     {
-        public abstract decimal discountPercentage{ get; set; }
+        public abstract decimal discountPercentage { get; set; }
         public abstract DiscountOrderEnum orderEnum { get; set; }
     }
 }

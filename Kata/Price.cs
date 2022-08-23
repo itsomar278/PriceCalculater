@@ -16,7 +16,6 @@ namespace Kata
             }
             basePrice = price;
         }
-
         public decimal basePrice { get; private set; }
     }
 }
