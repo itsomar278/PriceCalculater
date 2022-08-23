@@ -10,7 +10,13 @@ namespace Kata
     {
         public static string DiscountReport(this PriceCalculater price)
         {
-          return($" {price.UniversalDiscountAmount + price.SelectiveDiscountAmount} $ amount which was deduced");
+            decimal totalDiscounts = price.UniversalDiscountAmount + price.SelectiveDiscountAmount;
+            decimal  capAmount = price.cap.CAPAmount(price.product.price.basePrice);
+            if (capAmount < totalDiscounts)
+            {
+                totalDiscounts = capAmount;
+            }
+          return($" {totalDiscounts} $ amount which was deduced");
         }
         public static string ExpensesReport(this PriceCalculater price)
         {
