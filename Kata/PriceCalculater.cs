@@ -8,19 +8,21 @@ namespace Kata
 {
     public class PriceCalculater
     {
-        public PriceCalculater(List<Discount> discounts, CombiningEnum combiningEnum,List<Expense> expenses, TaxCalculater tax, Product product)
+        public PriceCalculater(List<Discount> discounts, CombiningEnum combiningEnum, CAP cap, List<Expense> expenses, TaxCalculater tax, Product product)
         {
             this.tax = tax;
             this.discounts = discounts;
             this.expenses = expenses;
             this.product = product;
             this.combiningEnum = combiningEnum;
+            this.cap = cap;
         }
         public List<Expense> expenses;
         public List<Discount> discounts;
         public TaxCalculater tax;
         public Product product;
         public CombiningEnum combiningEnum;
+        public CAP cap;
         public decimal UniversalDiscountAmount { get; set; }
         public decimal SelectiveDiscountAmount { get; set; }
         public decimal TaxAmount { get; set; }
@@ -76,7 +78,6 @@ namespace Kata
                     {
                         SelectiveDiscountAmount += discountAcount;
                     }
-    
                 }
             }
         }
@@ -94,6 +95,10 @@ namespace Kata
             TaxApply();
             ApplyAfterTaxDiscounts();
             decimal TotalDiscounts = UniversalDiscountAmount + SelectiveDiscountAmount;
+            if(TotalDiscounts>cap.CAPAmount(product.price.basePrice ))
+                {
+                TotalDiscounts = cap.CAPAmount(product.price.basePrice);
+                }
             ExpensesApply();
             return (product.price.basePrice - TotalDiscounts + TaxAmount + ExpensesAmount);
         }

@@ -32,7 +32,6 @@ namespace Kata
                     Name = value;
                 }
             }
-
         }
         public long UPC;
         public long _UPC

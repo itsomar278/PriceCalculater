@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kata
 {
-    public enum ExpenseTypeEnum
+    public enum RelativityEnum
     {
         Absolute = 0,
         relative = 1

@@ -25,13 +25,14 @@ namespace Kata
             discounts.Add(discount);
             discounts.Add(discount2);
             //expenses 
-            Expense expense = new Expense("packaging", ExpenseTypeEnum.relative, 0.01M);
-            Expense expense2 = new Expense("delivery", ExpenseTypeEnum.Absolute, 2.2M);
+            Expense expense = new Expense("packaging", RelativityEnum.relative, 0.01M);
+            Expense expense2 = new Expense("delivery", RelativityEnum.Absolute, 2.2M);
             List<Expense> expenses = new List<Expense>() ;
-            expenses.Add(expense);
-            expenses.Add(expense2);
+            // expenses.Add(expense);
+            //expenses.Add(expense2);
+            CAP cap = new CAP(4.0M, RelativityEnum.Absolute);
             // proccessing discount and taxes 
-            PriceCalculater price = new PriceCalculater(discounts, CombiningEnum.Multiplicative,expenses, tax, A);
+            PriceCalculater price = new PriceCalculater(discounts, CombiningEnum.Additive,cap ,expenses, tax, A);
             Console.WriteLine(price.FinalPrice());
         }
     }
