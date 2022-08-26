@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Kata
 {
-    public class UniversalDiscount : Discount ,Idiscount
+    public class UniversalDiscount : Idiscount
     {
         public UniversalDiscount(decimal discountPercentage , DiscountOrderEnum orderEnum)
         {
             this.discountPercentage = discountPercentage;
             this.orderEnum = orderEnum;
         }
-        public override DiscountOrderEnum orderEnum { get; set; }
-        public override decimal discountPercentage { get;  set; }
+        public DiscountOrderEnum orderEnum { get; set; }
+        public decimal discountPercentage { get;  set; }
         public decimal DiscountAmount(decimal price )
         {
                 decimal discountAmount = (price * discountPercentage);
