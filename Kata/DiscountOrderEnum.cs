@@ -8,7 +8,7 @@ namespace Kata
 {
     public enum DiscountOrderEnum
     {
-        before = 0,
-        after = 1
+        Before = 0,
+        After = 1
     }
 }

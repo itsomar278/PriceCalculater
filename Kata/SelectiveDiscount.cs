@@ -8,27 +8,26 @@ using System.Threading.Tasks;
 namespace Kata
 {
     
-    public class SelectiveDiscount :Discount ,Idiscount
+    public class SelectiveDiscount : IDiscount
     {
-        public SelectiveDiscount(long upc , decimal discountPercentage , DiscountOrderEnum orderEnum) 
+        public SelectiveDiscount(long upc ,decimal discountPercentage ,DiscountOrderEnum orderEnum) 
         {
-            this.discountPercentage = discountPercentage;
-            this.upc = upc;
-            this.orderEnum = orderEnum;
+            this.DiscountPercentage = discountPercentage;
+            this.UPC = upc;
+            this.OrderEnum = orderEnum;
         }
-        public override decimal discountPercentage { get ; set; }
-        public override DiscountOrderEnum orderEnum { get; set; }
-        long upc { get; set; }
-
+        public decimal DiscountPercentage { get ; set; }
+        public DiscountOrderEnum OrderEnum { get; set; }
+        long UPC { get; set; }
             public decimal DiscountAmount(decimal price )
         {
-                decimal discountAmount = (price * discountPercentage);
+                decimal discountAmount = (price * DiscountPercentage);
                 discountAmount = decimal.Round(discountAmount, 4, MidpointRounding.AwayFromZero);
                 return discountAmount;
         }
         public bool CanApply(long upc)
         {
-            if (upc == this.upc)
+            if (upc == this.UPC)
             {
                 return true; 
             }

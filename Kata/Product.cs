@@ -50,6 +50,6 @@ namespace Kata
                 throw new ArgumentException("UPC is invalid");
             }
         }
-        public Price price;        
+        public readonly Price price;        
     }
 }

@@ -11,7 +11,7 @@ namespace Kata
         public static string DiscountReport(this PriceCalculater price)
         {
             decimal totalDiscounts = price.UniversalDiscountAmount + price.SelectiveDiscountAmount;
-            decimal  capAmount = price.cap.CAPAmount(price.product.price.basePrice);
+            decimal  capAmount = price.cap.CAPAmount(price.product.price.BasePrice);
             if (capAmount < totalDiscounts)
             {
                 totalDiscounts = capAmount;
@@ -23,7 +23,7 @@ namespace Kata
             StringBuilder sb = new StringBuilder();
             foreach(Expense expense in price.expenses)
             {
-                 sb.AppendLine($"{expense.Description} : {expense.ExpenseAmount(price.product.price.basePrice)  } {price.region.ISOCurrencySymbol}");
+                 sb.AppendLine($"{expense.Description} : {expense.ExpenseAmount(price.product.price.BasePrice)  } {price.region.ISOCurrencySymbol}");
             }
             return sb.ToString() ;
         }

@@ -6,18 +6,18 @@ using System.Threading.Tasks;
 
 namespace Kata
 {
-    public class UniversalDiscount : Idiscount
+    public class UniversalDiscount : IDiscount
     {
         public UniversalDiscount(decimal discountPercentage , DiscountOrderEnum orderEnum)
         {
-            this.discountPercentage = discountPercentage;
-            this.orderEnum = orderEnum;
+            this.DiscountPercentage = discountPercentage;
+            this.OrderEnum = orderEnum;
         }
-        public DiscountOrderEnum orderEnum { get; set; }
-        public decimal discountPercentage { get;  set; }
+        public DiscountOrderEnum OrderEnum { get; set; }
+        public decimal DiscountPercentage { get;  set; }
         public decimal DiscountAmount(decimal price )
         {
-                decimal discountAmount = (price * discountPercentage);
+                decimal discountAmount = (price * DiscountPercentage);
                 discountAmount = decimal.Round(discountAmount, 4, MidpointRounding.AwayFromZero);
                 return discountAmount;
         }

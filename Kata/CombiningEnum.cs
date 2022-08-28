@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Kata
 {
-    public enum CombiningEnum
+    public enum CombiningMethodEnum
     {
         Additive =0,
         Multiplicative =1

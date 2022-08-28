@@ -10,7 +10,7 @@ namespace Kata
     {
         public CAP (decimal amount , RelativityEnum relativityEnum)
         {
-            this.amount=amount;
+            this.Amount=amount;
             this.relativityEnum=relativityEnum;
         }
 
@@ -18,16 +18,16 @@ namespace Kata
         {
             if(relativityEnum.Equals(RelativityEnum.Absolute))
                 {
-                return amount;
+                return Amount;
                 }
             else
             {
-                decimal value = amount * price; 
+                decimal value = Amount * price; 
                 value = decimal.Round(value, 2, MidpointRounding.AwayFromZero);
                 return value;
             }
         }
-        public decimal amount { get; set; }
+        public decimal Amount { get; set; }
         public RelativityEnum relativityEnum { get; set; }
     }
 }

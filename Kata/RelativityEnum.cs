@@ -9,6 +9,6 @@ namespace Kata
     public enum RelativityEnum
     {
         Absolute = 0,
-        relative = 1
+        Relative = 1
     }
 }

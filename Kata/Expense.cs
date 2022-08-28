@@ -12,11 +12,11 @@ namespace Kata
         {
             Description = description;
             Amount = amount;
-            this.expenseTypeEnum = expenseTypeEnum;
+            this.ExpenseTypeEnum = expenseTypeEnum;
         }
         public decimal ExpenseAmount(decimal price)
         {
-            if(expenseTypeEnum.Equals(RelativityEnum.Absolute))
+            if(ExpenseTypeEnum.Equals(RelativityEnum.Absolute))
                 {
                 return Amount;
                 }
@@ -29,6 +29,6 @@ namespace Kata
         }
         public String Description { get; set; }
         public decimal Amount { get; set; }
-        public RelativityEnum expenseTypeEnum { get; set; }
+        public RelativityEnum ExpenseTypeEnum { get; set; }
     }
 }

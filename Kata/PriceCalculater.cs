@@ -10,7 +10,7 @@ namespace Kata
 {
     public class PriceCalculater
     {
-        public PriceCalculater(List<Discount> discounts, CombiningEnum combiningEnum, CAP cap, List<Expense> expenses, TaxCalculater tax, Product product , RegionInfo region)
+        public PriceCalculater(List<IDiscount> discounts, CombiningMethodEnum combiningEnum, CAP cap, List<Expense> expenses, TaxCalculater tax, Product product , RegionInfo region)
         {
             this.tax = tax;
             this.discounts = discounts;
@@ -21,10 +21,10 @@ namespace Kata
             this.region = region; 
         }
         public List<Expense> expenses;
-        public List<Discount> discounts;
+        public List<IDiscount> discounts;
         public TaxCalculater tax;
         public Product product;
-        public CombiningEnum combiningEnum;
+        public CombiningMethodEnum combiningEnum;
         public CAP cap;
         public RegionInfo region;   
         public decimal UniversalDiscountAmount { get; set; }
@@ -35,24 +35,24 @@ namespace Kata
         public decimal ExpensesAmount { get; set; }
         public void ApplyBeforeTaxDiscounts()
         {
-            RemainingPrice = product.price.basePrice;
-            var DiscountsBefore = discounts.Where(dis => dis.orderEnum.Equals(DiscountOrderEnum.before)).ToList();
-            foreach (Idiscount dis in DiscountsBefore)
+            RemainingPrice = product.price.BasePrice;
+            var DiscountsBefore = discounts.Where(dis => dis.OrderEnum.Equals(DiscountOrderEnum.Before)).ToList();
+            foreach (IDiscount dis in DiscountsBefore)
             {
                 if (dis.CanApply(product.UPC))
                 {
-                    decimal discountAcount = dis.DiscountAmount(RemainingPrice);
-                    if (combiningEnum.Equals(CombiningEnum.Multiplicative))
+                    decimal discountAmount = dis.DiscountAmount(RemainingPrice);
+                    if (combiningEnum.Equals(CombiningMethodEnum.Multiplicative))
                     {
-                        RemainingPrice = RemainingPrice - discountAcount;
+                        RemainingPrice = RemainingPrice - discountAmount;
                     }
                     if (dis.GetType() == typeof(UniversalDiscount))
                     {
-                        UniversalDiscountAmount += discountAcount;
+                        UniversalDiscountAmount += discountAmount;
                     }
                     else
                     {
-                        SelectiveDiscountAmount += discountAcount;
+                        SelectiveDiscountAmount += discountAmount;
                     }
                 }
             }
@@ -63,13 +63,13 @@ namespace Kata
         }
         public void ApplyAfterTaxDiscounts()
         {
-            var DiscountsAfter = discounts.Where(dis => dis.orderEnum.Equals(DiscountOrderEnum.after)).ToList();
-            foreach (Idiscount dis in DiscountsAfter)
+            var DiscountsAfter = discounts.Where(dis => dis.OrderEnum.Equals(DiscountOrderEnum.After)).ToList();
+            foreach (IDiscount dis in DiscountsAfter)
             {
                 if (dis.CanApply(product.UPC))
                 {
                     decimal discountAcount = dis.DiscountAmount(RemainingPrice);
-                    if (combiningEnum.Equals(CombiningEnum.Multiplicative))
+                    if (combiningEnum.Equals(CombiningMethodEnum.Multiplicative))
                         {
                         RemainingPrice = RemainingPrice - discountAcount;
                         }
@@ -89,21 +89,20 @@ namespace Kata
         {
             foreach ( Expense expense in expenses)
             {
-                ExpensesAmount += expense.ExpenseAmount(product.price.basePrice);
+                ExpensesAmount += expense.ExpenseAmount(product.price.BasePrice);
             }
         }
-     
         public String FinalPrice()
         {
             ApplyBeforeTaxDiscounts();
             TaxApply();
             ApplyAfterTaxDiscounts();
             decimal TotalDiscounts = UniversalDiscountAmount + SelectiveDiscountAmount;
-            if(TotalDiscounts>cap.CAPAmount(product.price.basePrice ))
+            if(TotalDiscounts>cap.CAPAmount(product.price.BasePrice ))
                 {
-                TotalDiscounts = cap.CAPAmount(product.price.basePrice);
+                TotalDiscounts = cap.CAPAmount(product.price.BasePrice);
                 }
-            decimal total = product.price.basePrice + TaxAmount - TotalDiscounts;
+            decimal total = product.price.BasePrice + TaxAmount - TotalDiscounts;
             total = decimal.Round(total, 2, MidpointRounding.AwayFromZero);
             ExpensesApply();
             StringBuilder sb = new StringBuilder();

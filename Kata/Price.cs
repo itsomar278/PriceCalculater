@@ -14,8 +14,8 @@ namespace Kata
             {
                 throw new ArgumentException("check the product data entered ");
             }
-            basePrice = price;
+            BasePrice = price;
         }
-        public decimal basePrice { get; private set; }
+        public decimal BasePrice { get; private set; }
     }
 }
